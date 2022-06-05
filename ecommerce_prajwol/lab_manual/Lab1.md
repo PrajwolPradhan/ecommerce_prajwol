@@ -1,6 +1,11 @@
 # Ecommerce: Lab 1
-a. Objective: -
-To install Python, its framework, and database tools. -To build a project using the Django framework. -To create our own superuser. -To verify the frontend and backend in the browser. -To add other users and perform CRUD operations -To create product module named Brands
+a. Objective: 
+-To install Python, its framework, and database tools.<br> 
+-To build a project using the Django framework. <br>
+-To create our own superuser. <br>
+-To verify the frontend and backend in the browser. <br>
+-To add other users and perform CRUD operations <br>
+-To create product module named brands <br>
 
 b. Introduction: 
 E-commerce is a company that does business on the Internet. Python is a programming language for building websites and software, automating processes, and performing data analysis. Python is a general-purpose programming language. In short, Python can be used to develop a variety of applications and is not tailored to a particular problem. Django is a Python web framework that facilitates rapid development and clean, practical design. SQLite is a C language library that implements a small, fast, self-contained, reliable, full-featured SQL database engine. GitHub is a code hosting platform used for collaboration.
