@@ -39,4 +39,4 @@ def index(request):
                 'brands': brands,
                 'search_query': q,
             }
-            return render(request, 'index.html', context)
+        return render(request, 'index.html', context)

@@ -1,7 +1,5 @@
-from django.contrib import admin
-from django.urls import path, include
-from .views import index, include
+from django.urls import path
+from .views import index
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('product_module.urls')),
+    path('', index),
 ]
