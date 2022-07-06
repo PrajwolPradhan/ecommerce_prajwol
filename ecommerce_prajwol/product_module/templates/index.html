@@ -1,110 +1,152 @@
-{% extends "base.html" %} 
-{% block title %} Search {% endblock %} 
-{% block header %} Search Product {% endblock %} 
+{% extends "base.html" %}
+{% load static %}
 {% block content %}
-<!--Navbar-->
-  <nav class="navbar navbar-expand-lg">
-    <div>
-      <!-- Links -->
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link text-dark" href="/ ">All</a>
-        </li>
-        {% for category in categories %}
-        <li class="nav-item">
-          <a class="nav-link text-dark" href="/?category={{category.id}}">{{category.name}}</a>
-        </li>
-        {% endfor %} {% for brand in brands %}
-        <li class="nav-item">
-          <a class="nav-link text-dark" href="/?brand={{brand.id}}">{{brand.name}}</a>
-        </li>
-        {% endfor %}
-      </ul>
-      <!-- Links -->
-    </div>
-    <div>
-      <form class="form-inline" method="POST">
-        {% csrf_token %}
-        <div>
-          <input name="query" class="form-control" type="text" placeholder="Search/enter price-range" aria-label="Search" value="{{search_query}}"/>
-        </div>
-      </form>
-    </div>
-  </nav>
-  <!--/.Navbar-->
-  {% for product in products %}
-  <div class="row border bg-light">
-    <div class="col-md-4">
-      <div class="text-center">
-        <img src="{{ product.image_url }}" style="height: 200px; width: auto" alt="{{ product.name }}"/>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <span class="btn btn-danger disabled">{{ product.brand.name }}</span>
-      <span class="btn btn-info disabled">{{ product.category.name }}</span>
-      <h3>{{ product.name }}</h3>
-      <h4 class="bold text-secondary">
-        <strong>NRs. {{ product.price }}</strong>
-      </h4>
-      <form class="d-flex" action="/cart" method="GET">
-        <!-- Default input -->
-        <input type="hidden" name="id" value="{{product.id}}" />
-        <input
-          type="number"
-          name="qty"
-          value="1"
-          arialabel="Search"
-          class="form-control"
-          style="width: 100px"
-        />
-        <button
-          id="btn-add-to-cart"
-          class="btn btn-primary btn-md"
-          type="submit"
-          data-toggle="modal"
-          data-target="#cart-model"
-        >
-          <i class="fa fashopping- cart" aria-hidden="true"></i> Add to cart
-        </button>
-      </form>
-    </div>
-    <div class="col-md-5">
-      <table class="table table-sm">
-        <tr>
-          <td>Available Quantity</td>
-          <td>{{product.quantity}}</td>
-        </tr>
-        <tr>
-          <td>Color Code</td>
-          <td>
-            <div
-              style="height: 25px; width: 25px; backgroundcolor:{{ product.color_code }};">
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>Brand</td>
-          <td>{{ product.brand.name }}</td>
-        </tr>
-        <tr>
-          <td>Category</td>
-          <td>{{ product.category.name }}</td>
-        </tr>
-        <tr>
-          <td>Registered On</td>
-          <td>{{ product.registered_on }}</td>
-        </tr>
-        <tr>
-          <td>Is Active</td>
-          <td>
-            {% if product.is_active %}
-            <input type="checkbox" checked />
-            {% else %}
-            <input type="checkbox" />
-            {% endif %}
-          </td>
-        </tr>
-      </table>
-    </div>
-  </div>
-{% endfor %} {% endblock %}
+
+		<aside id="colorlib-hero">
+			<div class="flexslider">
+				<ul class="slides">
+			   	<li style="background-image: url(static/images/img_bg_1.jpg);">
+			   		<div class="overlay"></div>
+			   		<div class="container-fluid">
+			   			<div class="row">
+				   			<div class="col-sm-6 offset-sm-3 text-center slider-text">
+				   				<div class="slider-text-inner">
+				   					<div class="desc">
+					   					<h1 class="head-1">Men's</h1>
+					   					<h2 class="head-2">Shoes</h2>
+					   					<h2 class="head-3">Collection</h2>
+					   					<p class="category"><span>New trending shoes</span></p>
+					   					<p><a href="#" class="btn btn-primary">Shop Collection</a></p>
+				   					</div>
+				   				</div>
+				   			</div>
+				   		</div>
+			   		</div>
+			   	</li>
+			   	<li style="background-image: url(static/images/img_bg_2.jpg);">
+			   		<div class="overlay"></div>
+			   		<div class="container-fluid">
+			   			<div class="row">
+				   			<div class="col-sm-6 offset-sm-3 text-center slider-text">
+				   				<div class="slider-text-inner">
+				   					<div class="desc">
+					   					<h1 class="head-1">Huge</h1>
+					   					<h2 class="head-2">Sale</h2>
+					   					<h2 class="head-3"><strong class="font-weight-bold">50%</strong> Off</h2>
+					   					<p class="category"><span>Big sale sandals</span></p>
+					   					<p><a href="#" class="btn btn-primary">Shop Collection</a></p>
+				   					</div>
+				   				</div>
+				   			</div>
+				   		</div>
+			   		</div>
+			   	</li>
+			   	<li style="background-image: url(static/images/img_bg_3.jpg);">
+			   		<div class="overlay"></div>
+			   		<div class="container-fluid">
+			   			<div class="row">
+				   			<div class="col-sm-6 offset-sm-3 text-center slider-text">
+				   				<div class="slider-text-inner">
+				   					<div class="desc">
+					   					<h1 class="head-1">New</h1>
+					   					<h2 class="head-2">Arrival</h2>
+					   					<h2 class="head-3">up to <strong class="font-weight-bold">30%</strong> off</h2>
+					   					<p class="category"><span>New stylish shoes for men</span></p>
+					   					<p><a href="#" class="btn btn-primary">Shop Collection</a></p>
+				   					</div>
+				   				</div>
+				   			</div>
+				   		</div>
+			   		</div>
+			   	</li>
+			  	</ul>
+		  	</div>
+		</aside>
+		<div class="colorlib-intro">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12 text-center">
+						<h2 class="intro">It started with a simple idea: Create quality, well-designed products that I wanted myself.</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="colorlib-product">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-sm-6 text-center">
+						<div class="featured">
+							<a href="#" class="featured-img" style="background-image: url(static/images/men.jpg);"></a>
+							<div class="desc">
+								<h2><a href="#">Shop Men's Collection</a></h2>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6 text-center">
+						<div class="featured">
+							<a href="#" class="featured-img" style="background-image: url(static/images/women.jpg);"></a>
+							<div class="desc">
+								<h2><a href="#">Shop Women's Collection</a></h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="colorlib-product">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-8 offset-sm-2 text-center colorlib-heading">
+						<h2>Best Sellers</h2>
+					</div>
+				</div>
+				
+				<div class="row row-pb-md">
+					{% for product in products %}
+					<div class="col-lg-3 mb-4 text-center">
+						<div class="product-entry border">
+							<a href="#" class="prod-img">
+								<img src="{{ product.image_url }}" class="img-fluid" alt="{{ product.name }}">
+							</a>
+							<div class="desc">
+								<h2><a href="disabled">{{ product.name}}</a></h2>
+								<h2><a href="disabled">{{ product.brand.name}}</a></h2>
+								<span class="price">NRs.{{product.price}}</span>
+							</div>
+						</div>
+					</div>
+					{%endfor%}
+			</div>
+		</div>
+
+		<div class="colorlib-partner">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-8 offset-sm-2 text-center colorlib-heading colorlib-heading-sm">
+						<h2>Trusted Partners</h2>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col partner-col text-center">
+						<img src="{% static 'images/brand-1.jpg' %}" class="img-fluid" alt="Free html4 bootstrap 4 template">
+					</div>
+					<div class="col partner-col text-center">
+						<img src="{% static 'images/brand-2.jpg' %}" class="img-fluid" alt="Free html4 bootstrap 4 template">
+					</div>
+					<div class="col partner-col text-center">
+						<img src="{% static 'images/brand-3.jpg' %}" class="img-fluid" alt="Free html4 bootstrap 4 template">
+					</div>
+					<div class="col partner-col text-center">
+						<img src="{% static 'images/brand-4.jpg' %}" class="img-fluid" alt="Free html4 bootstrap 4 template">
+					</div>
+					<div class="col partner-col text-center">
+						<img src="{% static 'images/brand-5.jpg' %}" class="img-fluid" alt="Free html4 bootstrap 4 template">
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+{% endblock %}
+
